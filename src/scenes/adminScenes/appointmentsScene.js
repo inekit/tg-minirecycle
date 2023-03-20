@@ -19,10 +19,9 @@ const scene = new CustomWizardScene("appointmentsScene").enter(async (ctx) => {
   const lastAppointment = (
     await connection
       .query(
-        `select username, w.*, rc.name rc_name, rc.coordinates rc_coordinates from waste w 
+        `select username, w.* from waste w 
         left join users u  on user_id = u.id 
-        left join recycle_centers rc  on rc_id = rc.id 
-        where w.status = 'issued' and w.recycle_photo is not null 
+        where w.status = 'issued'
         order by datetime_created limit 1`
       )
       .catch((e) => {})
@@ -43,12 +42,7 @@ const scene = new CustomWizardScene("appointmentsScene").enter(async (ctx) => {
     coordinates,
     user_id,
     datetime_created,
-    recycle_coordinates,
-    recycle_photo,
-    use_nft_way,
-    use_nft_fund,
-    rc_name,
-    rc_coordinates,
+    photo,
   } = lastAppointment;
 
   const keyboard = { name: "ga_keyboard", args: [id] };
@@ -56,14 +50,11 @@ const scene = new CustomWizardScene("appointmentsScene").enter(async (ctx) => {
     id,
     username ?? "no username",
     user_id,
-    type_name,
-    rc_name,
-    rc_coordinates ? `${rc_coordinates.x}, ${rc_coordinates.y}` : "no",
-    `${recycle_coordinates.x}, ${recycle_coordinates.y}`,
+    `${coordinates.x}, ${coordinates.y}`,
     datetime_created,
   ]);
 
-  await ctx.replyWithPhoto(recycle_photo).catch((e) => {});
+  await ctx.replyWithPhoto(photo).catch((e) => {});
 
   if (edit) return ctx.editMenu(title, keyboard);
 

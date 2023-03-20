@@ -72,6 +72,12 @@ async function save(ctx, wayName, edit = false) {
     });
 }
 
+scene.action("help", (ctx) => {
+  ctx
+    .answerCbQuery(ctx.getTitle("HELP_TITLE"), { show_alert: true })
+    .catch((e) => {});
+});
+
 scene.action("back", async (ctx) => {
   await ctx.answerCbQuery().catch((e) => {});
 

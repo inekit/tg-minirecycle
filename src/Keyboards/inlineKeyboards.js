@@ -10,13 +10,11 @@ const { inlineKeyboard } = Markup;
 
 exports.main_keyboard = (ctx, isAdmin) => {
   const kb = inlineKeyboard([
-    [callbackButton(ctx.getTitle("PHOTO_BUTTON"), "photo")],
     [callbackButton(ctx.getTitle("WASTE_BUTTON"), "waste")],
     [callbackButton(ctx.getTitle("REWARD_BUTTON"), "reward")],
     [callbackButton(ctx.getTitle("USE_BUTTON"), "use")],
-    [callbackButton(ctx.getTitle("CHARITY_BUTTON"), "charity")],
     [callbackButton(ctx.getTitle("RATING_BUTTON"), "rating")],
-    [callbackButton(ctx.getTitle("NEWS_BUTTON"), "news")],
+    [callbackButton(ctx.getTitle("ABOUT_BUTTON"), "about")],
   ]);
 
   if (isAdmin)
@@ -96,10 +94,9 @@ exports.ptw_keyboard = (ctx) =>
 
 exports.waste_keyboard = (ctx) =>
   inlineKeyboard([
+    [callbackButton(ctx.getTitle("PHOTO_BUTTON"), "photo")],
     [callbackButton(ctx.getTitle("GEOPOSITION_BUTTON"), "geo")],
-    [callbackButton(ctx.getTitle("AUTOMATIC_SEARCH_BUTTON"), "auto_search")],
-    [callbackButton(ctx.getTitle("MANUAL_SEARCH_BUTTON"), "manual_search")],
-    [callbackButton(ctx.getTitle("GO_BUTTON"), "go")],
+    [callbackButton(ctx.getTitle("DONE_BUTTON"), "done")],
     [callbackButton(ctx.getTitle("BACK_BUTTON"), "back")],
   ]);
 
@@ -111,6 +108,11 @@ exports.geo_keyboard = (ctx) => {
           {
             text: ctx.getTitle("SEND_LOCATION_BUTTON"),
             request_location: true,
+          },
+        ],
+        [
+          {
+            text: ctx.getTitle("NO_BUTTON"),
           },
         ],
       ],
@@ -129,11 +131,17 @@ exports.back_keyboard = (ctx) =>
 exports.go_back_keyboard = (ctx) =>
   inlineKeyboard([[callbackButton(ctx.getTitle("BACK_BUTTON"), "go_back")]]);
 
+exports.submit_reward_keyboard = (ctx) =>
+  inlineKeyboard([
+    [callbackButton(ctx.getTitle("SUBMIT_REWARD_BUTTON"), "reward")],
+    [callbackButton(ctx.getTitle("BACK_BUTTON"), "go_back")],
+  ]);
+
 exports.reward_keyboard = (ctx) =>
   inlineKeyboard([
-    [callbackButton(ctx.getTitle("GEOPOSITION_BUTTON"), "geo")],
-    [callbackButton(ctx.getTitle("PHOTO_BUTTON"), "photo")],
-    [callbackButton(ctx.getTitle("GET_NFT_BUTTON"), "nft")],
+    [urlButton(ctx.getTitle("FAQ_REWARD_BUTTON"), "impact-to-earn.com")],
+    [callbackButton(ctx.getTitle("SETUP_TON_BUTTON"), "ton")],
+    [callbackButton(ctx.getTitle("SETUP_CHARITY_BUTTON"), "charity")],
     [callbackButton(ctx.getTitle("BACK_BUTTON"), "back")],
   ]);
 
@@ -156,12 +164,17 @@ exports.rating_keyboard = (ctx) =>
 
 exports.use_keyboard = (ctx) =>
   inlineKeyboard([
-    [callbackButton("Web 3 (Roblox, etc)", "way-web3")],
-    [callbackButton("Web 2 (Goods & Services)", "way-web2")],
-    [callbackButton("Cash", "way-cash")],
-    [callbackButton("Staking NFT", "way-staking")],
-    [callbackButton("Charity", "way-charity")],
-    [callbackButton("Add", "add")],
+    [
+      callbackButton(
+        "Web3 (Roblox, Minecraft…)",
+        "way-Web3 (Roblox, Minecraft…)"
+      ),
+    ],
+    [callbackButton("Online Gods/Services", "way-Online Gods/Services")],
+    [callbackButton("Offline Gods/Services", "way-Offline Gods/Services")],
+    [callbackButton("Cash", "way-Cash")],
+    [callbackButton("Gold", "way-Gold")],
+    [callbackButton(ctx.getTitle("BUTTON_HELP"), "help")],
     [callbackButton(ctx.getTitle("BACK_BUTTON"), "back")],
   ]);
 
@@ -181,10 +194,16 @@ exports.about_keyboard = (ctx) => {
     [
       urlButton(ctx.getTitle("BUTTON_SUPPORT_SITE"), "impact-to-earn.com"),
       urlButton(
-        ctx.getTitle("BUTTON_SUPPORT_CHAT"),
-        "https://t.me/impact_to_earn"
+        ctx.getTitle("BUTTON_SUPPORT_TWITTER"),
+        "https://twitter.com/ban_tgo "
       ),
-      callbackButton("BUTTON_GO_BACK", "go_back"),
+      urlButton(
+        ctx.getTitle("BUTTON_SUPPORT_LINKEDIN"),
+        "https://www.linkedin.com/company/bantgo/ "
+      ),
+      urlButton(ctx.getTitle("BUTTON_TG_CHAT"), "https://t.me/impact_to_earn"),
+      urlButton(ctx.getTitle("BUTTON_SUPPORT_CHAT"), "https://t.me/impac2earn"),
+      callbackButton(ctx.getTitle("BUTTON_BACK"), "back"),
     ],
     { columns: 1 }
   );

@@ -8,13 +8,11 @@ const titles = require("telegraf-steps").titlesGetter(__dirname + "/Titles");
 const mainStage = new Stage(
   [
     require("./scenes/mainScene"),
-    require("./scenes/clientScenes/photoScene"),
     require("./scenes/clientScenes/wasteScene"),
     require("./scenes/clientScenes/rewardScene"),
     require("./scenes/clientScenes/useScene"),
-    require("./scenes/clientScenes/charityScene"),
     require("./scenes/clientScenes/ratingScene"),
-    require("./scenes/clientScenes/newsScene"),
+    require("./scenes/clientScenes/aboutScene"),
 
     require("./scenes/adminScenes/adminScene"),
     require("./scenes/adminScenes/adminsScene"),

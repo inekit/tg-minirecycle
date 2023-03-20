@@ -23,34 +23,16 @@ scene.action("live", async (ctx) => {
       )
     )?.[0]?.count;
 
-    const types_str = (
-      await connection.query(
-        "select type_name, count(id) from waste where status='aprooved' group by type_name"
-      )
-    )
-      ?.map((el) => `${el.type_name}:${el.count}`)
-      ?.join("\n");
     const use_ways_str = (
       await connection.query(
-        "select use_nft_way, count(id) from waste where status='aprooved' and use_nft_fund IS NOT NULL group by use_nft_way"
+        "select use_nft_way, count(id) from waste where status='aprooved' group by use_nft_way"
       )
     )
       ?.map((el) => `${el.use_nft_way}:${el.count}`)
       ?.join("\n");
-    const funds_str = (
-      await connection.query(
-        "select use_nft_fund, count(id) from waste where status='aprooved' and use_nft_fund IS NOT NULL group by use_nft_fund"
-      )
-    )
-      ?.map((el) => `${el.use_nft_fund}:${el.count}`)
-      ?.join("\n");
+
     ctx.editMenu(
-      ctx.getTitle("RATING_LIVE", [
-        total,
-        types_str ?? "not used yet",
-        use_ways_str ?? "not used yet",
-        funds_str ?? "not used yet",
-      ]),
+      ctx.getTitle("RATING_LIVE", [total, use_ways_str ?? "not used yet"]),
       "go_back_keyboard"
     );
   } catch (e) {
@@ -73,38 +55,17 @@ scene.action("personal", async (ctx) => {
       )
     )?.[0]?.count;
 
-    const types_str = (
-      await connection.query(
-        "select type_name, count(id) from waste where status='aprooved' and user_id = $1 group by type_name",
-        [user_id]
-      )
-    )
-      ?.map((el) => `${el.type_name}:${el.count}`)
-      ?.join("\n");
     const use_ways_str = (
       await connection.query(
-        "select use_nft_way, count(id) from waste where status='aprooved' and user_id = $1 and use_nft_fund IS NOT NULL group by use_nft_way",
+        "select use_nft_way, count(id) from waste where status='aprooved' and user_id = $1 group by use_nft_way",
         [user_id]
       )
     )
       ?.map((el) => `${el.use_nft_way}:${el.count}`)
       ?.join("\n");
-    const funds_str = (
-      await connection.query(
-        "select use_nft_fund, count(id) from waste where status='aprooved' and user_id = $1 and use_nft_fund IS NOT NULL group by use_nft_fund",
-        [user_id]
-      )
-    )
-      ?.map((el) => `${el.use_nft_fund}:${el.count}`)
-      ?.join("\n");
 
     ctx.editMenu(
-      ctx.getTitle("RATING_PERSONAL", [
-        total,
-        types_str ?? "not used yet",
-        use_ways_str ?? "not used yet",
-        funds_str ?? "not used yet",
-      ]),
+      ctx.getTitle("RATING_PERSONAL", [total, use_ways_str ?? "not used yet"]),
       "go_back_keyboard"
     );
   } catch (e) {

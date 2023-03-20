@@ -55,12 +55,6 @@ const clientScene = new CustomWizardScene("clientScene").enter(async (ctx) => {
   });
 });
 
-clientScene.action("photo", async (ctx) => {
-  await ctx.answerCbQuery().catch((e) => {});
-
-  ctx.scene.enter("photoScene");
-});
-
 clientScene.action("waste", async (ctx) => {
   await ctx.answerCbQuery().catch((e) => {});
 
@@ -79,22 +73,16 @@ clientScene.action("use", async (ctx) => {
   ctx.scene.enter("useScene");
 });
 
-clientScene.action("charity", async (ctx) => {
-  await ctx.answerCbQuery().catch((e) => {});
-
-  ctx.scene.enter("charityScene");
-});
-
 clientScene.action("rating", async (ctx) => {
   await ctx.answerCbQuery().catch((e) => {});
 
   ctx.scene.enter("ratingScene");
 });
 
-clientScene.action("news", async (ctx) => {
+clientScene.action("about", async (ctx) => {
   await ctx.answerCbQuery().catch((e) => {});
 
-  ctx.scene.enter("newsScene");
+  ctx.scene.enter("aboutScene");
 });
 
 clientScene.action("admin", async (ctx) => {

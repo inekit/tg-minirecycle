@@ -5,8 +5,6 @@ const { SnakeNamingStrategy } = require("typeorm-naming-strategies");
 const User = require("./src/db/entity/User");
 const Admin = require("./src/db/entity/Admin");
 const Waste = require("./src/db/entity/Waste");
-const RecycleCenter = require("./src/db/entity/RecycleCenter");
-const WasteType = require("./src/db/entity/WasteType");
 
 const { DataSource } = require("typeorm");
 
@@ -19,7 +17,7 @@ const AppDataSource = new DataSource({
   username: DB_USER,
   password: DB_PASSWORD,
   database: DB_DATABASE,
-  entities: [User, Admin, Waste, WasteType, RecycleCenter],
+  entities: [User, Admin, Waste],
   synchronize: true,
   migrationsTableName: "custom_migration_table",
   migrations: ["./src/db/migrations/*.js"],

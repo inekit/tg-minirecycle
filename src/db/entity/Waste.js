@@ -9,11 +9,6 @@ module.exports = new EntitySchema({
       generated: true,
       type: "bigint",
     },
-    type_name: {
-      type: "varchar",
-      length: 255,
-      nullable: false,
-    },
     photo: {
       type: "varchar",
       length: 255,
@@ -31,25 +26,12 @@ module.exports = new EntitySchema({
       type: "timestamp",
       default: () => "NOW()",
     },
-    rc_id: {
-      type: "bigint",
-      nullable: true,
-    },
-    recycle_coordinates: {
-      type: "point",
-      nullable: true,
-    },
-    recycle_photo: {
-      type: "varchar",
-      length: 255,
-      nullable: true,
-    },
     use_nft_way: {
       type: "varchar",
       length: 45,
       nullable: true,
     },
-    use_nft_fund: {
+    ton_wallet: {
       type: "varchar",
       length: 255,
       nullable: true,
@@ -62,24 +44,8 @@ module.exports = new EntitySchema({
     },
   },
   relations: {
-    type: {
-      target: "WasteType",
-      type: "one-to-many",
-      cascade: true,
-      joinColumn: true,
-      onDelete: "cascade",
-      onUpdate: "cascade",
-    },
     user: {
       target: "User",
-      type: "one-to-many",
-      cascade: true,
-      joinColumn: true,
-      onDelete: "cascade",
-      onUpdate: "cascade",
-    },
-    rc: {
-      target: "RecycleCenter",
       type: "one-to-many",
       cascade: true,
       joinColumn: true,

@@ -18,7 +18,7 @@ module.exports = new EntitySchema({
       length: 45,
       nullable: true,
     },
-    use_nft_fund: {
+    ton_wallet: {
       type: "varchar",
       length: 255,
       nullable: true,
